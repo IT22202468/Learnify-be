@@ -1,4 +1,4 @@
-const sql = require('mssql');
+import sql from 'mssql';
 
 const createUser = async (fullname, email, password) => {
   const request = new sql.Request();
@@ -11,4 +11,4 @@ const createUser = async (fullname, email, password) => {
     );
 };
 
-module.exports = { createUser };
+export default createUser;

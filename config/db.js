@@ -1,16 +1,16 @@
-const sql = require('mssql/msnodesqlv8');
+import sql from 'mssql';
 
 const sqlConfig = {
-  user: process.env.DB_USER || 'learnify',
-  password: process.env.DB_PASS || 'password123!@',
-  database: process.env.DB_NAME || 'UserManagement',
-  server: process.env.DB_HOST || 'localhost',
-  driver: 'msnodesqlv8',
+  user: 'nipun',
+  password: 'nipun',
+  database: 'student',
+  server: 'localhost\\SQLEXPRESS',
   options: {
-    encrypt: true, // Use true if you're on Azure
     trustedConnection: true, // Use for local SQL Server
     trustServerCertificate: true,
+    enableArithAbort: true,
   },
+  port: 1433,
 };
 
 const connectDB = async () => {
@@ -18,8 +18,8 @@ const connectDB = async () => {
     await sql.connect(sqlConfig);
     console.log('Connected to SQL Server');
   } catch (err) {
-    console.error('Database connection failed:', err.message);
+    console.log('Database connection failed:', err.message);
   }
 };
 
-module.exports = connectDB;
+export default connectDB;
