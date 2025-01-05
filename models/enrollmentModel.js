@@ -2,12 +2,29 @@
 
 import sql from 'mssql';
 
-export const enrollUserInCourse = async (userId, courseId) => {
+export const enrollUserInCourse = async (id, courseId) => {
   const request = new sql.Request();
-  await request
-    .input('UserId', sql.Int, userId)
+
+  const result = await request
+    .input('id', sql.Int, id)
     .input('CourseId', sql.Int, courseId)
     .query(
-      'INSERT INTO Enrollments (UserId, CourseId) VALUES (@UserId, @CourseId)'
+      'SELECT COUNT(*) AS count FROM Enrollments WHERE UserId = @id AND CourseId = @CourseId'
     );
+
+    console.log(result.recordset[0].count);
+
+  if (result.recordset[0].count> 0) {
+    return { alreadyEnrolled: true, success: false };
+  } else {
+    await request
+    .query(
+      'INSERT INTO Enrollments (UserId, CourseId) VALUES (@id, @CourseId)'
+    );
+    return { alreadyEnrolled: false, success: true };
+
+  }
+
+
+  
 };

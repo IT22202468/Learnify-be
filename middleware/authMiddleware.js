@@ -4,8 +4,11 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 export const protect = (req, res, next) => {
+
   let token = req.headers.authorization;
 
+  console.log('token', token);
+  
   if (token && token.startsWith('Bearer')) {
     token = token.split(' ')[1];
 

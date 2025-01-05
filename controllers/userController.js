@@ -4,6 +4,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import { createUser, getUserByEmail, getUserProfile } from '../models/userModel.js';
+import e from 'express';
 
 dotenv.config();
 
@@ -22,6 +23,30 @@ export const registerUser = async (req, res) => {
     res.status(201).json({ message: 'User registered successfully' });
   } catch (error) {
     res.status(500).json({ message: 'Server error', error });
+  }
+};
+
+//Verify user
+export const verifyUser = async (req, res) => {
+  const { token } = req.body;
+
+  console.log(token);
+
+  if (!token) {
+    return res.status(400).json({ message: 'Invalid token' });
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const userId = decoded.id;
+
+    if(userId){
+      return res.status(200).json({ message: 'User verified successfully' });
+    } else {
+      return res.status(400).json({ message: 'Invalid token' });
+    }
+} catch (error) {
+    res.status(500).json({ message: 'Error verifying user', error });
   }
 };
 
@@ -48,7 +73,7 @@ export const loginUser = async (req, res) => {
     }
     
     const token = jwt.sign({ id: user.Id }, process.env.JWT_SECRET, {
-      expiresIn: '1h',
+      expiresIn: '1d',
     });
 
     res.status(200).json({ token });
