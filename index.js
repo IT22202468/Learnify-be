@@ -14,7 +14,6 @@ app.use(express.json());
 connectDB();
 
 app.use(cors());
-app.use(bodyParser.json());
 
 app.use('/api/users', userRoutes);
 app.use('/api/courses', courseRoutes);
