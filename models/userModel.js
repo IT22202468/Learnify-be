@@ -1,5 +1,6 @@
+// userModel.js
+
 import sql from 'mssql';
-import bcrypt from 'bcrypt';
 
 export const createUser = async (fullname, email, hashedPassword) => {
   const request = new sql.Request();

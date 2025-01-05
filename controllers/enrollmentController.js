@@ -1,5 +1,7 @@
+// enrollmentController.js
+
 import { enrollUserInCourse } from '../models/enrollmentModel.js';
-// import { getEnrolledCoursesByUser } from '../models/enrollmentModel.js';
+import { getEnrolledCoursesByUser } from '../models/enrollmentModel.js';
 
 // Enroll user in a course
 export const enrollCourse = async (req, res) => {

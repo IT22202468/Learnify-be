@@ -1,3 +1,5 @@
+// userController.js
+
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
@@ -39,8 +41,6 @@ export const loginUser = async (req, res) => {
     if (!user) {
       return res.status(400).json({ message: 'User not found' });
     }
-
-    console.log(password, user.Password);
     const isMatch = await bcrypt.compare(password, user.Password);
 
     if (!isMatch) {

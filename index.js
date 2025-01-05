@@ -1,3 +1,5 @@
+// index.js
+
 import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
@@ -8,6 +10,7 @@ import courseRoutes from './routes/courseRoutes.js';
 import enrollmentsRoutes from './routes/enrollmentsRoutes.js';
 
 const app = express();
+app.use(express.json());
 connectDB();
 
 app.use(cors());

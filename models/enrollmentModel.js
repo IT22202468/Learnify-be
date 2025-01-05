@@ -1,3 +1,5 @@
+// enrollmentModel.js
+
 import sql from 'mssql';
 
 export const enrollUserInCourse = async (userId, courseId) => {

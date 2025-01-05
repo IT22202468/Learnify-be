@@ -1,3 +1,5 @@
+// enrollementsRoutes.js
+
 import express from 'express';
 import { enrollCourse, getUserEnrolledCourses } from '../controllers/enrollmentController.js';
 
