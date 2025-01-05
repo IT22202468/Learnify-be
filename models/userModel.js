@@ -21,3 +21,24 @@ export const getUserByEmail = async (email) => {
 
   return result.recordset[0];
 };
+
+
+// Get user profile
+export const getUserProfile = async (userId) => {
+  const request = new sql.Request();
+
+  // Get user details and enrolled courses
+  const result = await request
+    .input('UserId', sql.Int, userId)
+    .query(`
+      SELECT 
+        u.Fullname, u.Email, u.CreatedAt,
+        c.Name AS CourseName, c.Description, c.Price, c.Duration
+      FROM Users u
+      LEFT JOIN Enrollments e ON u.Id = e.UserId
+      LEFT JOIN Courses c ON e.CourseId = c.Id
+      WHERE u.Id = @UserId
+    `);
+
+  return result.recordset;
+};
