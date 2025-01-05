@@ -27,8 +27,6 @@ export const enrollCourse = async (req, res) => {
 
     
     const enrollmentResult = await enrollUserInCourse(decoded.id, courseId);
-    
-    console.log(enrollmentResult);
 
     if (enrollmentResult.alreadyEnrolled) {
       return res.status(204).json({ message: 'You are already enrolled in this course.' });

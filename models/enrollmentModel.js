@@ -12,8 +12,6 @@ export const enrollUserInCourse = async (id, courseId) => {
       'SELECT COUNT(*) AS count FROM Enrollments WHERE UserId = @id AND CourseId = @CourseId'
     );
 
-    console.log(result.recordset[0].count);
-
   if (result.recordset[0].count> 0) {
     return { alreadyEnrolled: true, success: false };
   } else {
