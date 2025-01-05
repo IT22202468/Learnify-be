@@ -33,7 +33,7 @@ export const getUserProfile = async (userId) => {
     .query(`
       SELECT 
         u.Fullname, u.Email, u.CreatedAt,
-        c.Name AS CourseName, c.Description, c.Price, c.Duration
+        c.Name AS CourseName, c.Description, c.Price, c.Duration, c.Thumbnail
       FROM Users u
       LEFT JOIN Enrollments e ON u.Id = e.UserId
       LEFT JOIN Courses c ON e.CourseId = c.Id
