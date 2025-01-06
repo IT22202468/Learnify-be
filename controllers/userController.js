@@ -4,9 +4,10 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import { createUser, getUserByEmail, getUserProfile } from '../models/userModel.js';
-import e from 'express';
 
 dotenv.config();
+
+const saltRounds = parseInt(process.env.SALT_ROUNDS, 10);
 
 //Register user
 export const registerUser = async (req, res) => {
@@ -16,7 +17,7 @@ export const registerUser = async (req, res) => {
     return res.status(400).json({ message: 'Please fill all fields' });
   }
 
-  const hashedPassword = await bcrypt.hash(password,10);
+  const hashedPassword = await bcrypt.hash(password,saltRounds);
 
   try {
     await createUser(fullname, email, hashedPassword);
