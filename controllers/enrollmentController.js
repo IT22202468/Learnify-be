@@ -49,15 +49,4 @@ export const enrollCourse = async (req, res) => {
       .status(500)
       .json({ message: "Server error", error: error.message });
   }
-
-  // if (!userId || !courseId) {
-  //   return res.status(400).json({ message: 'User ID and Course ID are required' });
-  // }
-
-  // try {
-  //   await enrollUserInCourse(userId, courseId);
-  //   res.status(201).json({ message: 'User enrolled successfully' });
-  // } catch (error) {
-  //   res.status(500).json({ message: 'Server error', error });
-  // }
 };
